@@ -33,6 +33,42 @@ activities = {
         "max_participants": 20,
         "participants": ["emma@mergington.edu", "sophia@mergington.edu"]
     },
+    "Basketball Team": {
+    "description": "Practice and compete in basketball games",
+    "schedule": "Tuesdays, 4:00 PM - 6:00 PM",
+    "max_participants": 15,
+    "participants": []
+    },
+    "Swimming Club": {
+    "description": "Swim training and endurance practice",
+    "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+    "max_participants": 12,
+    "participants": []
+    },
+    "Drama Club": {
+    "description": "Acting practice and theater performances",
+    "schedule": "Mondays, 4:00 PM - 5:30 PM",
+    "max_participants": 20,
+    "participants": []
+    },
+    "Photography Club": {
+    "description": "Learn photography techniques and editing",
+    "schedule": "Wednesdays, 3:00 PM - 4:30 PM",
+    "max_participants": 10,
+    "participants": []
+    },
+    "Math Olympiad": {
+    "description": "Solve advanced math problems and compete",
+    "schedule": "Fridays, 2:30 PM - 4:00 PM",
+    "max_participants": 10,
+    "participants": []
+    },
+    "Science Club": {
+    "description": "Do experiments and explore science projects",
+    "schedule": "Thursdays, 2:30 PM - 4:00 PM",
+    "max_participants": 14,
+    "participants": []
+    },
     "Gym Class": {
         "description": "Physical education and sports activities",
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
@@ -63,5 +99,8 @@ def signup_for_activity(activity_name: str, email: str):
     activity = activities[activity_name]
 
     # Add student
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
